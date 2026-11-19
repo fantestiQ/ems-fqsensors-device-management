@@ -1,4 +1,4 @@
-package com.fq.fqsensors.device.management;
+package com.fq.fqsensors.device.management.common;
 
 import io.hypersistence.tsid.TSID;
 

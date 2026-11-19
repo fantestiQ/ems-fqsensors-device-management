@@ -1,6 +1,6 @@
 package com.fq.fqsensors.device.management.api.controller;
 
-import com.fq.fqsensors.device.management.IdGenerator;
+import com.fq.fqsensors.device.management.common.IdGenerator;
 import com.fq.fqsensors.device.management.api.model.SensorInput;
 import com.fq.fqsensors.device.management.domain.model.Sensor;
 import org.springframework.http.HttpStatus;
