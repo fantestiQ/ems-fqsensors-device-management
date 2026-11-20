@@ -1,6 +1,5 @@
 package com.fq.fqsensors.device.management.domain.model;
 
-import com.fq.fqsensors.device.management.api.model.SensorId;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

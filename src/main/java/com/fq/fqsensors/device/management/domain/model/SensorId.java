@@ -1,4 +1,4 @@
-package com.fq.fqsensors.device.management.api.model;
+package com.fq.fqsensors.device.management.domain.model;
 
 import io.hypersistence.tsid.TSID;
 import jakarta.persistence.Embeddable;

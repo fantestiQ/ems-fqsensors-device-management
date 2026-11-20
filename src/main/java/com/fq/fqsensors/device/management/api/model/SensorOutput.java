@@ -1,7 +1,9 @@
 package com.fq.fqsensors.device.management.api.model;
 
 import com.fq.fqsensors.device.management.domain.model.Sensor;
+import com.fq.fqsensors.device.management.domain.model.SensorId;
 import io.hypersistence.tsid.TSID;
+
 
 public record SensorOutput (
         TSID id,
