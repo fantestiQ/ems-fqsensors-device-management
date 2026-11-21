@@ -28,3 +28,4 @@ public class Sensor {
     private String model;
     private Boolean enebled;
 }
+
