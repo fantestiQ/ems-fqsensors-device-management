@@ -1,5 +1,6 @@
 package com.fq.fqsensors.device.management.api.controller;
 
+import com.fq.fqsensors.device.management.api.client.impl.SensorMonitoringClientImpl;
 import com.fq.fqsensors.device.management.domain.model.SensorId;
 import com.fq.fqsensors.device.management.api.model.SensorOutput;
 import com.fq.fqsensors.device.management.common.IdGenerator;
@@ -26,6 +27,8 @@ import java.net.URI;
 public class SensorController {
 
     private final SensorRepository repository;
+
+    private final SensorMonitoringClientImpl sensorMonitoringClient;
 
     @PostMapping
     public ResponseEntity<SensorOutput> create(@RequestBody @NonNull SensorInput input){
@@ -86,6 +89,8 @@ public class SensorController {
                 .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
         repository.delete(sensor);
+
+        sensorMonitoringClient.disableMonitoring(sensorId);
         return ResponseEntity.noContent().build();
     }
 
@@ -96,6 +101,9 @@ public class SensorController {
 
         sensor.setEnebled(true);
         repository.saveAndFlush(sensor);
+        sensorMonitoringClient.enableMonitoring(sensorId);
+
+
         return ResponseEntity.noContent().build();
     }
 
@@ -106,6 +114,7 @@ public class SensorController {
 
         sensor.setEnebled(false);
         repository.saveAndFlush(sensor);
+        sensorMonitoringClient.disableMonitoring(sensorId);
         return ResponseEntity.noContent().build();
     }
 }
