@@ -69,6 +69,14 @@ public class SensorController {
         return ResponseEntity.ok(sensors.map(SensorOutput::create));
     }
 
+    @GetMapping("{sensorId}/detail")
+    public ResponseEntity<SensorOutput> getOneWithDetail(@PathVariable TSID sensorId){
+        Sensor sensor =   repository.findById(new SensorId(sensorId))
+                .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        return ResponseEntity.ok(SensorOutput.create(sensor));
+    }
+
     @PutMapping("{sensorId}")
     public ResponseEntity<SensorOutput> update(@PathVariable TSID sensorId,@Valid @RequestBody SensorInput input){
         Sensor sensor = repository.findById(new SensorId(sensorId))

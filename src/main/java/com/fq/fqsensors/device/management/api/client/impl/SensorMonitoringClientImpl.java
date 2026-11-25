@@ -1,17 +1,19 @@
 package com.fq.fqsensors.device.management.api.client.impl;
 
+import com.fq.fqsensors.device.management.api.client.RestClientFactory;
 import com.fq.fqsensors.device.management.api.client.SensorMonitoringClient;
 import io.hypersistence.tsid.TSID;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
+
 
 @Component
 public class SensorMonitoringClientImpl implements SensorMonitoringClient {
 
     private final RestClient restClient;
 
-    public SensorMonitoringClientImpl(RestClient.Builder builder) {
-        this.restClient = builder.baseUrl("http://localhost:8082").build();
+    public SensorMonitoringClientImpl(RestClientFactory factory) {
+        this.restClient = factory.temperatureMonitoringRestClient();
     }
 
     @Override
