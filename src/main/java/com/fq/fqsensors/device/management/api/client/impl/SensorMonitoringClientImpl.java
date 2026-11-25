@@ -2,6 +2,7 @@ package com.fq.fqsensors.device.management.api.client.impl;
 
 import com.fq.fqsensors.device.management.api.client.RestClientFactory;
 import com.fq.fqsensors.device.management.api.client.SensorMonitoringClient;
+import com.fq.fqsensors.device.management.api.model.SensorMonitoringOutput;
 import io.hypersistence.tsid.TSID;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
@@ -24,11 +25,20 @@ public class SensorMonitoringClientImpl implements SensorMonitoringClient {
                     .toBodilessEntity();
     }
 
+
     @Override
     public void disableMonitoring(TSID sensorId) {
         restClient.delete()
                 .uri("/api/sensors/{sensorId}/monitoring/enable", sensorId)
                 .retrieve()
                 .toBodilessEntity();
+    }
+
+    @Override
+    public SensorMonitoringOutput getDetails(TSID sensorId) {
+        return restClient.get()
+                .uri("/api/sensors/{sensorId}/monitoring", sensorId)
+                .retrieve()
+                .body(SensorMonitoringOutput.class);
     }
 }

@@ -1,6 +1,8 @@
 package com.fq.fqsensors.device.management.api.controller;
 
 import com.fq.fqsensors.device.management.api.client.impl.SensorMonitoringClientImpl;
+import com.fq.fqsensors.device.management.api.model.SensorDetails;
+import com.fq.fqsensors.device.management.api.model.SensorMonitoringOutput;
 import com.fq.fqsensors.device.management.domain.model.SensorId;
 import com.fq.fqsensors.device.management.api.model.SensorOutput;
 import com.fq.fqsensors.device.management.common.IdGenerator;
@@ -70,11 +72,16 @@ public class SensorController {
     }
 
     @GetMapping("{sensorId}/detail")
-    public ResponseEntity<SensorOutput> getOneWithDetail(@PathVariable TSID sensorId){
+    public ResponseEntity<SensorDetails> getOneWithDetail(@PathVariable TSID sensorId){
         Sensor sensor =   repository.findById(new SensorId(sensorId))
                 .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-        return ResponseEntity.ok(SensorOutput.create(sensor));
+        SensorMonitoringOutput sensorOutput = sensorMonitoringClient.getDetails(sensorId);
+        SensorDetails details = SensorDetails.builder().monitoring(sensorOutput)
+                .sensor(SensorOutput.create(sensor)).build();
+
+
+        return ResponseEntity.ok(details);
     }
 
     @PutMapping("{sensorId}")
