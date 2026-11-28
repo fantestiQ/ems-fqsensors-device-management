@@ -1,6 +1,6 @@
 package com.fq.fqsensors.device.management.api.controller;
 
-import com.fq.fqsensors.device.management.api.client.impl.SensorMonitoringClientImpl;
+import com.fq.fqsensors.device.management.api.client.SensorMonitoringClient;
 import com.fq.fqsensors.device.management.api.model.SensorDetails;
 import com.fq.fqsensors.device.management.api.model.SensorMonitoringOutput;
 import com.fq.fqsensors.device.management.domain.model.SensorId;
@@ -30,7 +30,7 @@ public class SensorController {
 
     private final SensorRepository repository;
 
-    private final SensorMonitoringClientImpl sensorMonitoringClient;
+    private final SensorMonitoringClient sensorMonitoringClient;
 
     @PostMapping
     public ResponseEntity<SensorOutput> create(@RequestBody @NonNull SensorInput input){
